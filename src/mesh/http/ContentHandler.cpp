@@ -93,6 +93,9 @@ void registerHandlers(HTTPServer *insecureServer, HTTPSServer *secureServer)
     ResourceNode *nodeJsonFsBrowseStatic = new ResourceNode("/json/fs/browse/static", "GET", &handleFsBrowseStatic);
     ResourceNode *nodeJsonDelete = new ResourceNode("/json/fs/delete/static", "DELETE", &handleFsDeleteStatic);
 
+    ResourceNode *nodePotatoMeshSettings = new ResourceNode("/potatomesh", "GET", &handlePotatoMeshSettings);
+    ResourceNode *nodePotatoMeshSettingsApply = new ResourceNode("/potatomesh", "POST", &handlePotatoMeshSettingsApply);
+
     ResourceNode *nodeRoot = new ResourceNode("/*", "GET", &handleStatic);
 
     // Secure nodes
@@ -115,6 +118,8 @@ void registerHandlers(HTTPServer *insecureServer, HTTPSServer *secureServer)
     //    secureServer->registerNode(nodeAdminFs);
     //    secureServer->registerNode(nodeAdminSettings);
     //    secureServer->registerNode(nodeAdminSettingsApply);
+    secureServer->registerNode(nodePotatoMeshSettings);
+    secureServer->registerNode(nodePotatoMeshSettingsApply);
     secureServer->registerNode(nodeRoot); // This has to be last
 
     // Insecure nodes
@@ -136,6 +141,8 @@ void registerHandlers(HTTPServer *insecureServer, HTTPSServer *secureServer)
     //    insecureServer->registerNode(nodeAdminFs);
     //    insecureServer->registerNode(nodeAdminSettings);
     //    insecureServer->registerNode(nodeAdminSettingsApply);
+    insecureServer->registerNode(nodePotatoMeshSettings);
+    insecureServer->registerNode(nodePotatoMeshSettingsApply);
     insecureServer->registerNode(nodeRoot); // This has to be last
 }
 
@@ -907,6 +914,7 @@ void handleAdmin(HTTPRequest *req, HTTPResponse *res)
     //    res->println("<a href=/admin/settings>Settings</a><br>");
     //    res->println("<a href=/admin/fs>Manage Web Content</a><br>");
     res->println("<a href=/json/report>Device Report</a><br>");
+    res->println("<a href=/potatomesh>Potato-Mesh Ingestor Settings</a><br>");
 }
 
 void handleAdminSettings(HTTPRequest *req, HTTPResponse *res)

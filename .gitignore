@@ -4,6 +4,9 @@ pio.tar
 web
 web.tar
 
+# potato-mesh ingestor secrets - copy PotatoMeshConfig.h.example instead
+src/modules/PotatoMeshConfig.h
+
 # ignore vscode IDE settings files
 .vscode/*
 !.vscode/settings.json

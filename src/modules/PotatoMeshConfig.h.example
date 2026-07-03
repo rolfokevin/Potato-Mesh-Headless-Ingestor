@@ -1,0 +1,31 @@
+#pragma once
+
+// Copy this file to PotatoMeshConfig.h (gitignored) and fill in your instance
+// details. Never commit the real PotatoMeshConfig.h - it holds your API token.
+//
+// These are only the *seed* defaults, used the first time the device boots.
+// Once running, every value here can be changed without reflashing via the
+// device's own web UI at http://<device-ip>/potatomesh (saved to
+// /potatomesh.json on flash, which then takes priority over these defines).
+// Ship with the domain/token below blank so ingestion stays off until someone
+// configures it through that page.
+
+#define POTATOMESH_INSTANCE_DOMAIN ""
+#define POTATOMESH_API_TOKEN ""
+
+// Flip any of these to 0 to stop ingesting that data type without touching the
+// module code.
+#define POTATOMESH_ENABLE_NODES 1
+#define POTATOMESH_ENABLE_POSITIONS 1
+#define POTATOMESH_ENABLE_TELEMETRY 1
+#define POTATOMESH_ENABLE_MESSAGES 1
+#define POTATOMESH_ENABLE_NEIGHBORS 1
+#define POTATOMESH_ENABLE_TRACES 1
+
+// Comma-separated channel names to ingest from (matches a Python ingestor's
+// ALLOWED_CHANNELS). Leave as "" to ingest from every channel.
+#define POTATOMESH_ALLOWED_CHANNELS ""
+
+// Packets with weaker SNR than this are dropped (matches MIN_SNR). Packets
+// with no SNR info - e.g. our own originated data - always pass through.
+#define POTATOMESH_MIN_SNR -20.0f
