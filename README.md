@@ -72,18 +72,21 @@ esptool.py --chip esp32s3 write-flash 0x0 firmware-heltec-v3-2.8.0.factory.bin
 
 ## Known limitations
 
-- Traceroute records don't include `elapsed_ms` (would need request/response
-  pairing not currently implemented).
-- Power telemetry only maps channel 1's voltage/current to potato-mesh's
-  generic `voltage`/`current` fields; air-quality telemetry sends envelope
-  fields only, no PM/CO2 readings (potato-mesh has no confirmed schema for
-  either yet).
-- No `HIDDEN_CHANNELS`-equivalent (the reference Python ingestor supports
-  excluding specific channels' content even when otherwise allowed).
+- No `HIDDEN_CHANNELS`-equivalent: the reference Python ingestor can route a
+  channel normally but withhold its message content from potato-mesh even
+  when the channel is otherwise allowed. This firmware doesn't have that
+  separate opt-out list — a channel is either ingested or it isn't.
 - Settings aren't wired into Meshtastic's native moduleConfig system, so they
   won't appear in the official Meshtastic app's Module Configuration screen —
   that would require changes to Meshtastic's protobufs and to the separate
   mobile/web app codebases. The web page above is the tradeoff made instead.
+
+Power/air-quality telemetry and traceroute `elapsed_ms` are *not* listed here
+as limitations: potato-mesh's own ingestion schema has no fields for
+per-channel power readings or PM/CO2 air-quality data, so there's nothing
+more useful to send there regardless of firmware; `elapsed_ms` has an
+optional schema slot but it's unconfirmed whether potato-mesh's UI uses it
+for anything.
 
 ## Built on Meshtastic
 
