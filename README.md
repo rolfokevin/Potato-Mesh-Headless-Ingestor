@@ -1,3 +1,7 @@
+> **This fork adds a [potato-mesh](https://github.com/l5yth/potato-mesh) headless ingestor.**
+> See [POTATO-MESH.md](POTATO-MESH.md) for what it does and how to configure it.
+> Everything below is the unmodified upstream Meshtastic README.
+
 <div align="center" markdown="1">
 
 <img src=".github/meshtastic_logo.png" alt="Meshtastic Logo" width="80"/>
