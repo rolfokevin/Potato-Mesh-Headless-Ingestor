@@ -113,6 +113,17 @@
 #if defined(HAS_HARDWARE_WATCHDOG)
 #include "watchdog/watchdogThread.h"
 #endif
+#if !MESHTASTIC_EXCLUDE_POTATOMESH
+#include "modules/PotatoMeshHeartbeat.h"
+#include "modules/PotatoMeshMessageModule.h"
+#include "modules/PotatoMeshNeighborModule.h"
+#include "modules/PotatoMeshNodeModule.h"
+#include "modules/PotatoMeshPositionModule.h"
+#include "modules/PotatoMeshSettings.h"
+#include "modules/PotatoMeshTelemetryModule.h"
+#include "modules/PotatoMeshTraceModule.h"
+#include "modules/PotatoMeshUploader.h"
+#endif
 /**
  * Create module instances here.  If you are adding a new module, you must 'new' it here (or somewhere else)
  */
@@ -272,6 +283,17 @@ void setupModules()
 #endif
 #if defined(HAS_HARDWARE_WATCHDOG)
     watchdogThread = new WatchdogThread();
+#endif
+#if !MESHTASTIC_EXCLUDE_POTATOMESH
+    potatoMeshSettingsLoad();
+    potatoMeshUploader = new PotatoMeshUploader();
+    potatoMeshNodeModule = new PotatoMeshNodeModule();
+    potatoMeshPositionModule = new PotatoMeshPositionModule();
+    potatoMeshTelemetryModule = new PotatoMeshTelemetryModule();
+    potatoMeshMessageModule = new PotatoMeshMessageModule();
+    potatoMeshNeighborModule = new PotatoMeshNeighborModule();
+    potatoMeshTraceModule = new PotatoMeshTraceModule();
+    potatoMeshHeartbeat = new PotatoMeshHeartbeat();
 #endif
     // NOTE! This module must be added LAST because it likes to check for replies from other modules and avoid sending extra
     // acks
